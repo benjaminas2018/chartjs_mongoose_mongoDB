@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const PostModel = require('../models/blog');
+const MonitorPostModel = require('../models/monitor');
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 //Import the mongoose module
@@ -124,7 +124,7 @@ function getMonth_Of_Posts(postData){
 
 function blogPostData(callback) {
   // after some calculation 
-  PostModel.find({}, function(err, postData){
+  MonitorPostModel.find({}, function(err, postData){
     if(err){
       console.log(err);
     }else{
@@ -142,10 +142,10 @@ function getSomeData(postData, callback){
 
     for(var key in content){
       //console.log('key: '+key, ', value: '+ content[key]);
-      if(key == 'month'){
+      if(key == 'timestamp'){
         month_data[i] = content[key];
       }
-      if(key == 'number_of_posts'){
+      if(key == 'duration'){
         number_of_posts_data[i] = content[key];
       }
     }
